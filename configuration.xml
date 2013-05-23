@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+        This file is part of Tryton. The COPYRIGHT file at the
+        top level of this repository contains the full copyright notices
+        and license terms.
+    -->
+<tryton>
+    <data>
+
+        <record model="ir.ui.view" id="sugarcrm_configuration_view_form">
+            <field name="model">sugarcrm.configuration</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <![CDATA[
+                    <form string="SugarCRM Configuration">
+                        <label name="url" />
+                        <field name="url" colspan="3" />
+                        <label name="username" />
+                        <field name="username" />
+                        <label name="password" />
+                        <field name="password" />
+                        <label name="last_import_time"/>
+                        <field name="last_import_time"/>
+                    </form>
+                ]]>
+            </field>
+        </record>
+
+
+        <record model="ir.action.act_window" id="act_sugar_configuration_form">
+            <field name="name">SugarCRM Configuration</field>
+            <field name="res_model">sugarcrm.configuration</field>
+        </record>
+        <record model="ir.action.act_window.view"
+                id="act_sugar_configuration_view1">
+            <field name="sequence" eval="1"/>
+            <field name="view" ref="sugarcrm_configuration_view_form"/>
+            <field name="act_window" ref="act_sugar_configuration_form"/>
+        </record>
+        <menuitem parent="party.menu_configuration"
+            action="act_sugar_configuration_form"
+            id="menu_sugar_configuration"
+            sequence="0" icon="tryton-list"/>
+        
+    </data>
+</tryton>
