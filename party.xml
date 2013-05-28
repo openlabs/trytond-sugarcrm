@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tryton>
+    <data>
+
+        <!-- Crons -->
+        <record model="res.user" id="user_sugarcrm">
+          <field name="login">user_cron_sugarcrm</field>
+          <field name="name">User Cron SugarCRM</field>
+          <field name="signature"></field>
+          <field name="active" eval="False"/>
+        </record>
+
+        <record model="res.user-res.group"
+            id="user_sugarcrm_group_party_admin">
+          <field name="user" ref="user_sugarcrm"/>
+          <field name="group" ref="party.group_party_admin"/>
+        </record>
+
+        <record model="ir.cron" id="cron_sugarcrm_import_opportunities">
+          <field name="name">Import SugarCRM Opportunities</field>
+          <field name="request_user" ref="res.user_admin"/>
+          <field name="user" ref="user_sugarcrm"/>
+          <field name="active" eval="True"/>
+          <field name="interval_number">1</field>
+          <field name="interval_type">days</field>
+          <field name="number_calls">-1</field>
+          <field name="repeat_missed" eval="True"/>
+          <field name="model">party.party</field>
+          <field name="function">import_opportunities_from_sugarcrm</field>
+        </record>
+
+    </data>
+</tryton>
