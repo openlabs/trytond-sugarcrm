@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Import Opportunities from SugarCRM &mdash; Tryton SugarCRM Integration 2.6.0.1dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.6.0.1dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Tryton SugarCRM Integration 2.6.0.1dev documentation" href="index.html" />
+    <link rel="next" title="Using Attachments" href="attachment.html" />
+    <link rel="prev" title="Configuring SugarCRM settings" href="configuration.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="attachment.html" title="Using Attachments"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="configuration.html" title="Configuring SugarCRM settings"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Tryton SugarCRM Integration 2.6.0.1dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="import-opportunities-from-sugarcrm">
+<h1>Import Opportunities from SugarCRM<a class="headerlink" href="#import-opportunities-from-sugarcrm" title="Permalink to this headline">¶</a></h1>
+<p>This section explains how the import of opportunities from SugarCRM will
+represent itself on Tryton.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All the data represented below is demo data and is only for
+demonstration purposes.</p>
+</div>
+<div class="section" id="opportunities-are-imported-as-parties">
+<span id="import-opportunities"></span><h2>Opportunities are imported as Parties<a class="headerlink" href="#opportunities-are-imported-as-parties" title="Permalink to this headline">¶</a></h2>
+<p>Only opportunities in the <cite>Closed Won</cite> state are imported in Tryton. This is
+periodically done by the Tryton CRON system. The default interval between two
+imports is a day, but can be modified to your requirements.
+<a class="reference internal" href="configuration.html#sugarcrm-cron"><em>Cron for importing Opportunities from SugarCRM</em></a>.</p>
+<p><strong>Opportunities in SugarCRM</strong></p>
+<a class="reference internal image-reference" href="_images/converted-opportunities.png"><img alt="_images/converted-opportunities.png" src="_images/converted-opportunities.png" style="width: 900px;" /></a>
+<p><strong>Opportunities imported as Parties in Tryton</strong></p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">Menu:</span> <span class="pre">Party</span> <span class="pre">&gt;</span> <span class="pre">Parties</span></tt></div>
+</div>
+<a class="reference internal image-reference" href="_images/imported-parties.png"><img alt="_images/imported-parties.png" src="_images/imported-parties.png" style="width: 900px;" /></a>
+<p><strong>Opportunity View in SugarCRM</strong></p>
+<a class="reference internal image-reference" href="_images/opportunity.png"><img alt="_images/opportunity.png" src="_images/opportunity.png" style="width: 900px;" /></a>
+<p><strong>Party in Tryton</strong></p>
+<a class="reference internal image-reference" href="_images/party.png"><img alt="_images/party.png" src="_images/party.png" style="width: 900px;" /></a>
+</div>
+<div class="section" id="understanding-the-import-mappings">
+<h2>Understanding the import mappings<a class="headerlink" href="#understanding-the-import-mappings" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Opportunities in `Closed Won` state</strong> are imported as <strong>Parties</strong></li>
+<li><strong>Accounts related to Opportunity</strong> are imported as <strong>addresses</strong>.</li>
+<li><strong>Billing and Shipping addresses on each account</strong> are imported as
+<strong>addresses</strong>.</li>
+<li><strong>Contacts related to the Opportunity</strong> are also imported as <strong>addresses</strong>.</li>
+<li><strong>Any phone, fax, email or website linked to Account or Contact</strong> are
+imported as <strong>contact mechanisms</strong>.</li>
+<li><strong>Any documents attached to Opportunity, Account or Contact</strong> are
+imported as <strong>attachments</strong>. It can be accessed as shown in section
+<a class="reference internal" href="attachment.html#accessing-attachments"><em>Accessing Attachments</em></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Import Opportunities from SugarCRM</a><ul>
+<li><a class="reference internal" href="#opportunities-are-imported-as-parties">Opportunities are imported as Parties</a></li>
+<li><a class="reference internal" href="#understanding-the-import-mappings">Understanding the import mappings</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="configuration.html"
+                        title="previous chapter">Configuring SugarCRM settings</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="attachment.html"
+                        title="next chapter">Using Attachments</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/import.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="attachment.html" title="Using Attachments"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="configuration.html" title="Configuring SugarCRM settings"
+             >previous</a> |</li>
+        <li><a href="index.html">Tryton SugarCRM Integration 2.6.0.1dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Openlabs Technologies and Consulting (P) Ltd..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

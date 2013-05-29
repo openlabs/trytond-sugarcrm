@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Configuring SugarCRM authentication details &mdash; Tryton SugarCRM Integration 2.6.0.1dev documentation</title>
+    <title>Configuring SugarCRM settings &mdash; Tryton SugarCRM Integration 2.6.0.1dev documentation</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,6 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Tryton SugarCRM Integration 2.6.0.1dev documentation" href="index.html" />
+    <link rel="next" title="Import Opportunities from SugarCRM" href="import.html" />
     <link rel="prev" title="Installing trytond-sugarcrm module" href="installation.html" /> 
   </head>
   <body>
@@ -33,6 +34,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="import.html" title="Import Opportunities from SugarCRM"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="installation.html" title="Installing trytond-sugarcrm module"
              accesskey="P">previous</a> |</li>
@@ -45,8 +49,8 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="configuring-sugarcrm-authentication-details">
-<h1>Configuring SugarCRM authentication details<a class="headerlink" href="#configuring-sugarcrm-authentication-details" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="configuring-sugarcrm-settings">
+<h1>Configuring SugarCRM settings<a class="headerlink" href="#configuring-sugarcrm-settings" title="Permalink to this headline">¶</a></h1>
 <p>The module should be configured with the REST API URL of the SugarCRM
 instance. The username and password of a user with sufficient access
 privileges is also required. This user can simply be the admin user.</p>
@@ -56,6 +60,42 @@ privileges is also required. This user can simply be the admin user.</p>
 <div class="line"><tt class="docutils literal"><span class="pre">Menu:</span> <span class="pre">Party</span> <span class="pre">&gt;</span> <span class="pre">Configuration</span> <span class="pre">&gt;</span> <span class="pre">SugarCRM</span> <span class="pre">Configuration</span></tt></div>
 </div>
 <a class="reference internal image-reference" href="_images/configure.png"><img alt="_images/configure.png" src="_images/configure.png" style="width: 900px;" /></a>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last"><cite>Last import time</cite> indicates the last date time at which the
+opportunities were imported from SugarCRM to Tryton.</p>
+</div>
+</div>
+<div class="section" id="cron-for-importing-opportunities-from-sugarcrm">
+<span id="sugarcrm-cron"></span><h2>Cron for importing Opportunities from SugarCRM<a class="headerlink" href="#cron-for-importing-opportunities-from-sugarcrm" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">Menu:</span> <span class="pre">Administration</span> <span class="pre">&gt;</span> <span class="pre">Scheduler</span> <span class="pre">&gt;</span> <span class="pre">Scheduled</span> <span class="pre">Actions</span></tt></div>
+</div>
+<a class="reference internal image-reference" href="_images/scheduler-list.png"><img alt="_images/scheduler-list.png" src="_images/scheduler-list.png" style="width: 900px;" /></a>
+<p>Open the selected cron with name <cite>Import SugarCRM Opportunities</cite>.</p>
+<a class="reference internal image-reference" href="_images/scheduler.png"><img alt="_images/scheduler.png" src="_images/scheduler.png" style="width: 900px;" /></a>
+<p>The details are described below:</p>
+<ul class="simple">
+<li><strong>Interval Number and Interval Unit:</strong> These fields together make up the
+interval duration of this cron. By default, it is set to <cite>1 Day</cite>.
+This means that the import takes place once in a day. You could increase or
+decrease the frequency by changing <cite>Interval Number</cite>, <cite>Interval Unit</cite>.</li>
+<li><strong>Next Call:</strong> Indicates the date and time in which the import from Sugar
+will happen the next time. You could change this time if you want to prepone
+or delay the import.</li>
+</ul>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You need not change the time here to make a quick manual import. You could go
+back into <a class="reference internal" href="#configure-sugarcrm-account"><em>configuration</em></a> and click on the
+Import button instead.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If the time of import just does not seem right to you, check your timezone
+in the preferences. Tryton displays times in the timezone set in the
+preferences of the user.</p>
+</div>
 </div>
 </div>
 
@@ -67,8 +107,9 @@ privileges is also required. This user can simply be the admin user.</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Configuring SugarCRM authentication details</a><ul>
+<li><a class="reference internal" href="#">Configuring SugarCRM settings</a><ul>
 <li><a class="reference internal" href="#configure-sugarcrm-account">Configure SugarCRM account</a></li>
+<li><a class="reference internal" href="#cron-for-importing-opportunities-from-sugarcrm">Cron for importing Opportunities from SugarCRM</a></li>
 </ul>
 </li>
 </ul>
@@ -76,6 +117,9 @@ privileges is also required. This user can simply be the admin user.</p>
   <h4>Previous topic</h4>
   <p class="topless"><a href="installation.html"
                         title="previous chapter">Installing trytond-sugarcrm module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="import.html"
+                        title="next chapter">Import Opportunities from SugarCRM</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/configuration.txt"
@@ -104,6 +148,9 @@ privileges is also required. This user can simply be the admin user.</p>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="import.html" title="Import Opportunities from SugarCRM"
+             >next</a> |</li>
         <li class="right" >
           <a href="installation.html" title="Installing trytond-sugarcrm module"
              >previous</a> |</li>
