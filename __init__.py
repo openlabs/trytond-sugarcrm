@@ -13,4 +13,8 @@ def register():
         Address,
         ContactMechanism,
         Configuration,
+        ImportOpportunitiesWizardView,
         module='sugarcrm', type_='model')
+    Pool.register(
+        ImportOpportunitiesWizard,
+        module='sugarcrm', type_='wizard')

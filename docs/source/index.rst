@@ -13,6 +13,8 @@ Contents:
 
    installation
    configuration
+   import
+   attachment
 
 
 Indices and tables
