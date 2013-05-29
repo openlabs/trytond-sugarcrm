@@ -21,6 +21,11 @@
                         <field name="password" />
                         <label name="last_import_time"/>
                         <field name="last_import_time"/>
+                        <newline/>
+                        <button name="test_connection" string="Test Connection"
+                                colspan="2"/>
+                        <button name="import_opportunities"
+                                string="Import Opportunities" colspan="2"/>
                     </form>
                 ]]>
             </field>
@@ -41,6 +46,25 @@
             action="act_sugar_configuration_form"
             id="menu_sugar_configuration"
             sequence="0" icon="tryton-list"/>
-        
+
+        <record model="ir.action.wizard" id="wizard_import_opportunity">
+            <field name="name">Import Opportunities</field>
+            <field name="wiz_name">import.sugar.opportunities.wiz</field>
+            <field name="model">sugarcrm.configuration</field>
+        </record>
+
+        <record model="ir.ui.view" id="import_sugar_opportunities_wiz_view_form">
+            <field name="model">import.sugar.opportunities.wiz.view</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <form string="Import Opportunities" col="2">
+                  <label id="status"
+                         string="Opportunities have been imported successfully."/>
+                </form>
+                ]]>
+            </field>
+        </record>
+
     </data>
 </tryton>
