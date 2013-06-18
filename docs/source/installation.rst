@@ -29,6 +29,27 @@ Installation from source code
 
         python setup.py install
 
+**Installing tryton dependency module**
+
+1. This module depends on another non standard tryton module
+   `party_communication
+   <https://bitbucket.org/zikzakmedia/trytond-party_communication>`_.
+
+2. The module can be downloaded as a `zip` or can be `cloned` by running
+
+   .. code-block:: sh 
+
+        hg clone https://bitbucket.org/zikzakmedia/trytond-party_communication
+
+3. If the module is downloaded as a zip, extract the module which will
+   give a directory.
+
+4. From the module directory, use the setup.py script with the command:
+
+   .. code-block:: sh
+
+        python setup.py install
+
 **Installing tryton module**
 
 1. The module source is available online and can be downloaded from

@@ -17,15 +17,15 @@ class ContactMechanism:
     __name__ = 'party.contact_mechanism'
 
     @classmethod
-    def create_from_sugarcrm_account(cls, account, party, connection=None):
-        """Create contact mechanisms for the given party from the
+    def create_from_sugarcrm_account(cls, account, address, connection=None):
+        """Create contact mechanisms for the given address from the
         sugarcrm account provided.
 
         ..note:: The account here refers to the customer account from
             sugarcrm `Accounts` module
 
         :param account: SugarCRM Account instance
-        :param party: Party active record
+        :param address: Address active record
 
         :returns: A list of contact mechanisms created
         """
@@ -42,7 +42,7 @@ class ContactMechanism:
                 cls.create({
                     'type': contact_type.split('_')[0],
                     'value': account[contact_type],
-                    'party': party.id,
+                    'address': address.id,
                 })
             )
             if account['phone_fax']:
@@ -50,7 +50,7 @@ class ContactMechanism:
                     cls.create({
                         'type': 'fax',
                         'value': account['phone_fax'],
-                        'party': party.id,
+                        'address': address.id,
                     })
                 )
 
@@ -64,21 +64,21 @@ class ContactMechanism:
                 cls.create({
                     'type': 'email',
                     'value': email['email_address'],
-                    'party': party.id,
+                    'address': address.id,
                 })
             )
         return contact_mechanisms
 
     @classmethod
-    def create_from_sugarcrm_contact(cls, contact, party, connection=None):
-        """Create contact mechanisms for the given party from the
+    def create_from_sugarcrm_contact(cls, contact, address, connection=None):
+        """Create contact mechanisms for the given address from the
         sugarcrm contact provided.
 
         ..note: The contact here refers to the customer contact from
             sugarcrm `Contacts` module
 
         :param contact: SugarCRM Contact instance
-        :param party: Party active record
+        :param address: Address active record
 
         :returns: A list of contact mechanisms created
         """
@@ -95,7 +95,7 @@ class ContactMechanism:
                 cls.create({
                     'type': contact_type.split('_')[0],
                     'value': contact[contact_type],
-                    'party': party.id,
+                    'address': address.id,
                 })
             )
             if contact['phone_fax']:
@@ -103,7 +103,7 @@ class ContactMechanism:
                     cls.create({
                         'type': 'fax',
                         'value': contact['phone_fax'],
-                        'party': party.id,
+                        'address': address.id,
                     })
                 )
             if contact['phone_mobile']:
@@ -111,7 +111,7 @@ class ContactMechanism:
                     cls.create({
                         'type': 'mobile',
                         'value': contact['phone_mobile'],
-                        'party': party.id,
+                        'address': address.id,
                     })
                 )
 
@@ -125,7 +125,7 @@ class ContactMechanism:
                 cls.create({
                     'type': 'email',
                     'value': email['email_address'],
-                    'party': party.id,
+                    'address': address.id,
                 })
             )
         return contact_mechanisms
@@ -138,7 +138,7 @@ class Address:
     sugarcrm_id = fields.Char('SugarCRM ID', readonly=True)
 
     @classmethod
-    def create_from_sugarcrm_account(cls, account, party):
+    def create_from_sugarcrm_account(cls, account, party, connection=None):
         """Create addresses for the given party from the
         sugarcrm account provided.
 
@@ -152,6 +152,7 @@ class Address:
         """
         Country = Pool().get('country.country')
         Subdivision = Pool().get('country.subdivision')
+        ContactMechanism = Pool().get('party.contact_mechanism')
 
         addresses = []
 
@@ -169,7 +170,7 @@ class Address:
                 account['billing_address_city'],
                 account['billing_address_postalcode']
             ]):
-            addresses.append(cls.create(
+            billing_address = cls.create(
                 {
                     'name': account['name'],
                     'street': account['billing_address_street'],
@@ -180,7 +181,12 @@ class Address:
                     'sugarcrm_id': account['id'],
                     'party': party.id,
                 }
-            ))
+            )
+            # Create contacts mechanisms for this address
+            ContactMechanism.create_from_sugarcrm_account(
+                account, billing_address, connection
+            )
+            addresses.append(billing_address)
         shipping_country = Country.search([
             ('name', 'ilike', account['shipping_address_country'])
         ], limit=1) or None
@@ -195,7 +201,7 @@ class Address:
                 account['shipping_address_city'],
                 account['shipping_address_postalcode']
             ]):
-            addresses.append(cls.create(
+            shipping_address = cls.create(
                 {
                     'name': account['name'],
                     'street': account['shipping_address_street'],
@@ -206,12 +212,17 @@ class Address:
                     'sugarcrm_id': account['id'],
                     'party': party.id,
                 }
-            ))
+            )
+            # Create contacts mechanisms for this address
+            ContactMechanism.create_from_sugarcrm_account(
+                account, shipping_address, connection
+            )
+            addresses.append(shipping_address)
 
         return addresses
 
     @classmethod
-    def create_from_sugarcrm_contact(cls, contact, party):
+    def create_from_sugarcrm_contact(cls, contact, party, connection=None):
         """Create addresses for the given party from the
         sugarcrm contact provided.
 
@@ -225,6 +236,7 @@ class Address:
         """
         Country = Pool().get('country.country')
         Subdivision = Pool().get('country.subdivision')
+        ContactMechanism = Pool().get('party.contact_mechanism')
 
         addresses = []
 
@@ -242,7 +254,7 @@ class Address:
                 contact['primary_address_city'],
                 contact['primary_address_postalcode']
             ]):
-            addresses.append(cls.create(
+            primary_address = cls.create(
                 {
                     'name': contact['name'],
                     'street': contact['primary_address_street'],
@@ -253,7 +265,11 @@ class Address:
                     'sugarcrm_id': contact['id'],
                     'party': party.id,
                 }
-            ))
+            )
+            ContactMechanism.create_from_sugarcrm_contact(
+                contact, primary_address, connection
+            )
+            addresses.append(primary_address)
         alt_country = Country.search([
             ('name', 'ilike', contact['alt_address_country'])
         ], limit=1) or None
@@ -264,11 +280,11 @@ class Address:
 
         # Create address only if street, city or postal code exist
         if any([
-                contact['primary_address_street'],
-                contact['primary_address_city'],
-                contact['primary_address_postalcode']
+                contact['alt_address_street'],
+                contact['alt_address_city'],
+                contact['alt_address_postalcode']
             ]):
-            addresses.append(cls.create(
+            alt_address = cls.create(
                 {
                     'name': contact['name'],
                     'street': contact['alt_address_street'],
@@ -279,7 +295,11 @@ class Address:
                     'sugarcrm_id': contact['id'],
                     'party': party.id,
                 }
-            ))
+            )
+            ContactMechanism.create_from_sugarcrm_contact(
+                contact, alt_address, connection
+            )
+            addresses.append(alt_address)
 
         return addresses
 
@@ -308,7 +328,6 @@ class Party:
         :param opportunity: SugarCRM opportunity object
         """
         Address = Pool().get('party.address')
-        ContactMechanism = Pool().get('party.contact_mechanism')
         Configuration = Pool().get('sugarcrm.configuration')
 
         # Check if this opportunity already exists in tryton
@@ -352,8 +371,7 @@ class Party:
             # Ideally it should be only one with a billing and a shipping
             # address
             for account in related_accounts:
-                Address.create_from_sugarcrm_account(account, party)
-                ContactMechanism.create_from_sugarcrm_account(
+                Address.create_from_sugarcrm_account(
                     account, party, connection
                 )
 
@@ -378,8 +396,7 @@ class Party:
 
             # Create addresses for all contacts linked to opportunity
             for contact in related_contacts:
-                Address.create_from_sugarcrm_contact(contact, party)
-                ContactMechanism.create_from_sugarcrm_contact(
+                Address.create_from_sugarcrm_contact(
                     contact, party, connection
                 )
 
