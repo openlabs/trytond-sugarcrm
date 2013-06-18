@@ -32,7 +32,7 @@ class Configuration(ModelSingleton, ModelSQL, ModelView):
     def __setup__(cls):
         super(Configuration, cls).__setup__()
         cls._error_messages.update({
-            'sugarcrm_settings_missing': \
+            'sugarcrm_settings_missing':
                 'SugarCRM settings on company are incomplete.',
         })
         cls._buttons.update({
@@ -57,11 +57,11 @@ class Configuration(ModelSingleton, ModelSQL, ModelView):
         """
         try:
             self.get_sugarcrm_connection()
-        except ValueError, exc:
+        except ValueError:
             self.raise_user_error(
                 'Connection Failed. Please check the REST API URL!'
             )
-        except sugarcrm.SugarError, exc:
+        except sugarcrm.SugarError:
             self.raise_user_error(
                 'Connection Failed. Incorrect username and/or password!'
             )

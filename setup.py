@@ -110,11 +110,10 @@ setup(name='trytond_sugarcrm',
     packages=[
         'trytond.modules.sugarcrm',
         'trytond.modules.sugarcrm.tests',
-        ],
+    ],
     package_data={
-        'trytond.modules.sugarcrm': info.get('xml', []) \
-            + ['tryton.cfg'],
-        },
+        'trytond.modules.sugarcrm': info.get('xml', []) + ['tryton.cfg'],
+    },
     classifiers=[
         'Development Status :: 4 - Development',
         'Environment :: Plugins',
@@ -129,7 +128,7 @@ setup(name='trytond_sugarcrm',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Topic :: Office/Business',
-        ],
+    ],
     license='GPL-3',
     install_requires=requires,
     tests_require=['mock'],
@@ -144,4 +143,4 @@ setup(name='trytond_sugarcrm',
         'xmltests': XMLTests,
         'audit': RunAudit,
     },
-    )
+)
