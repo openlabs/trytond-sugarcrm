@@ -31,3 +31,10 @@ Build Status (Develop)
 ---------------------
 
 .. image:: https://travis-ci.org/openlabs/trytond-sugarcrm.png?branch=develop
+
+
+Useful Links
+------------
+
+* `Python Package Index PyPI <https://pypi.python.org/pypi/trytond_sugarcrm>`_
+* `Documentation <http://openlabs.github.io/trytond-sugarcrm/>`
