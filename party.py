@@ -34,8 +34,8 @@ class ContactMechanism:
         contact_mechanisms = []
 
         for contact_type in [
-                'phone_office', 'phone_alternate', 'website'
-            ]:
+            'phone_office', 'phone_alternate', 'website'
+        ]:
             if not account[contact_type]:
                 continue
             contact_mechanisms.append(
@@ -87,8 +87,8 @@ class ContactMechanism:
         contact_mechanisms = []
 
         for contact_type in [
-                'phone_home', 'phone_work', 'phone_other'
-            ]:
+            'phone_home', 'phone_work', 'phone_other'
+        ]:
             if not contact[contact_type]:
                 continue
             contact_mechanisms.append(
@@ -166,10 +166,10 @@ class Address:
 
         # Create address only if street, city or postal code exist
         if any([
-                account['billing_address_street'],
-                account['billing_address_city'],
-                account['billing_address_postalcode']
-            ]):
+            account['billing_address_street'],
+            account['billing_address_city'],
+            account['billing_address_postalcode']
+        ]):
             billing_address = cls.create(
                 {
                     'name': account['name'],
@@ -197,10 +197,10 @@ class Address:
 
         # Create address only if street, city or postal code exist
         if any([
-                account['shipping_address_street'],
-                account['shipping_address_city'],
-                account['shipping_address_postalcode']
-            ]):
+            account['shipping_address_street'],
+            account['shipping_address_city'],
+            account['shipping_address_postalcode']
+        ]):
             shipping_address = cls.create(
                 {
                     'name': account['name'],
@@ -250,10 +250,10 @@ class Address:
 
         # Create address only if street, city or postal code exist
         if any([
-                contact['primary_address_street'],
-                contact['primary_address_city'],
-                contact['primary_address_postalcode']
-            ]):
+            contact['primary_address_street'],
+            contact['primary_address_city'],
+            contact['primary_address_postalcode']
+        ]):
             primary_address = cls.create(
                 {
                     'name': contact['name'],
@@ -280,10 +280,10 @@ class Address:
 
         # Create address only if street, city or postal code exist
         if any([
-                contact['alt_address_street'],
-                contact['alt_address_city'],
-                contact['alt_address_postalcode']
-            ]):
+            contact['alt_address_street'],
+            contact['alt_address_city'],
+            contact['alt_address_postalcode']
+        ]):
             alt_address = cls.create(
                 {
                     'name': contact['name'],
@@ -315,7 +315,7 @@ class Party:
         "Setup"
         super(Party, cls).__setup__()
         cls._error_messages.update({
-            'sugarcrm_id_not_found': \
+            'sugarcrm_id_not_found':
                 'This Party is not linked to a SugarCRM opportunity'
         })
 
@@ -487,7 +487,7 @@ class Party:
         # Paginate the records for 100 count on each call
         for i in range(0, total_opportunities_to_fetch, 100):
             opportunities = opportunity_module._search(
-                query, start=i, total=i+100, fields=['name']
+                query, start=i, total=i + 100, fields=['name']
             )
 
             for opportunity in opportunities:

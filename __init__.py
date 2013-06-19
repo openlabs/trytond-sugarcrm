@@ -2,8 +2,9 @@
 #this repository contains the full copyright notices and license terms.
 
 from trytond.pool import Pool
-from .party import *
-from .configuration import *
+from .party import Party, Address, ContactMechanism
+from .configuration import Configuration, ImportOpportunitiesWizardView, \
+        ImportOpportunitiesWizard
 
 
 def register():
