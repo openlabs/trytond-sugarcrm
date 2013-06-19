@@ -21,3 +21,13 @@ This data is stored in following format in Tryton.
 * **Any documents attached to Opportunity, Account or Contact** are
   imported as **attachments**.
 
+Build Status (Master)
+---------------------
+
+.. image:: https://travis-ci.org/openlabs/trytond-sugarcrm.png?branch=master
+
+
+Build Status (Develop)
+---------------------
+
+.. image:: https://travis-ci.org/openlabs/trytond-sugarcrm.png?branch=develop

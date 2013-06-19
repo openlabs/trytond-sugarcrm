@@ -2,4 +2,7 @@
 # make up an environment.
 
 # The python API for SugarCRM is not available on pypi
-git://github.com/sugarcrm/python_webservices_library.git
+git+git://github.com/sugarcrm/python_webservices_library.git
+
+# party_communication is not available on pypi
+hg+https://bitbucket.org/zikzakmedia/trytond-party_communication

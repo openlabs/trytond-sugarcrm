@@ -90,9 +90,12 @@ major_version, minor_version, _ = info.get('version', '0.0.1').split('.', 2)
 major_version = int(major_version)
 minor_version = int(minor_version)
 
-requires = ['sugarcrm']
+requires = [
+    'sugarcrm',
+    'trytonzz_party_communication>=2.6,<2.7',
+]
 for dep in info.get('depends', []):
-    if not re.match(r'(ir|res|webdav)(\W|$)', dep):
+    if not re.match(r'(ir|res|webdav|party_communication)(\W|$)', dep):
         requires.append('trytond_%s >= %s.%s, < %s.%s' %
                 (dep, major_version, minor_version, major_version,
                     minor_version + 1))
@@ -110,11 +113,10 @@ setup(name='trytond_sugarcrm',
     packages=[
         'trytond.modules.sugarcrm',
         'trytond.modules.sugarcrm.tests',
-        ],
+    ],
     package_data={
-        'trytond.modules.sugarcrm': info.get('xml', []) \
-            + ['tryton.cfg'],
-        },
+        'trytond.modules.sugarcrm': info.get('xml', []) + ['tryton.cfg'],
+    },
     classifiers=[
         'Development Status :: 4 - Development',
         'Environment :: Plugins',
@@ -129,7 +131,7 @@ setup(name='trytond_sugarcrm',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Topic :: Office/Business',
-        ],
+    ],
     license='GPL-3',
     install_requires=requires,
     tests_require=['mock'],
@@ -144,4 +146,4 @@ setup(name='trytond_sugarcrm',
         'xmltests': XMLTests,
         'audit': RunAudit,
     },
-    )
+)
