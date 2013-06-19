@@ -37,4 +37,4 @@ Useful Links
 ------------
 
 * `Python Package Index PyPI <https://pypi.python.org/pypi/trytond_sugarcrm>`_
-* `Documentation <http://openlabs.github.io/trytond-sugarcrm/>`
+* `Documentation <http://openlabs.github.io/trytond-sugarcrm/>`_
